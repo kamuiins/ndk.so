@@ -1,0 +1,19 @@
+cmake_minimum_required(VERSION 3.10.2)
+project(native-lib)
+
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+add_library( # Creates and names a shared library.
+             native-lib
+             SHARED
+             native-lib.cpp )
+
+# Link against Android log library (for __android_log_print)
+find_library( log-lib log )
+
+target_link_libraries( # Specifies the target library.
+                       native-lib
+                       PRIVATE
+                       ${log-lib} )
